@@ -125,7 +125,6 @@ public class Empresa {
                 atletaaux.setNacionalidad(nacionalidad);
                 atletaaux.setDeporte(deporte);
                 atletaaux.setAñosexperiencia(añosexperiencia);
-                atletaaux.setEquipo(equipo);
                 mensaje = "La información del atleta ha sido actualizada";
             }
         }
@@ -286,7 +285,7 @@ public class Empresa {
      * @param listaParticipantes
      * @return un mensaje indicando si se actualizó o no
      */
-    public String ActualizarEvento(EventoDeportivo evento, String nombre, Date fechainicio,String ubicacion,Deporte deporte, TipoEvento tipoevento, LinkedList<EquipoParticipante> listaequipos,LinkedList<Participante> listaParticipantes){
+    public String ActualizarEvento(EventoDeportivo evento, String nombre, Date fechainicio,String ubicacion,Deporte deporte, TipoEvento tipoevento, LinkedList<Participante> listaParticipantes){
         String mensaje = "No se pudo actualizar";
         if (evento != null) {
             EventoDeportivo eventoaux = buscarEvento(evento);
@@ -298,7 +297,6 @@ public class Empresa {
                 eventoaux2.setUbicacion(ubicacion);
                 eventoaux2.setDeporte(deporte);
                 eventoaux2.setTipoevento(tipoevento);
-                eventoaux2.setListaequipos(listaequipos);
                 eventoaux2.setListaParticipantes(listaParticipantes);
                 mensaje = "El evento ha sido actualizado correctamente";
             }

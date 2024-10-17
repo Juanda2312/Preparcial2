@@ -9,17 +9,15 @@ public class EventoDeportivo {
     private String ubicacion;
     private Deporte deporte;
     private TipoEvento	tipoevento;
-    private LinkedList<EquipoParticipante> listaequipos;
     private LinkedList<Participante> listaParticipantes;
 
-    public EventoDeportivo(String nombre, Date fechainicio,String ubicacion,Deporte deporte, TipoEvento tipoevento, LinkedList<EquipoParticipante> listaequipos,LinkedList<Participante> listaParticipantes){
+    public EventoDeportivo(String nombre, Date fechainicio,String ubicacion,Deporte deporte, TipoEvento tipoevento,LinkedList<Participante> listaParticipantes){
         this.nombre = nombre;
         this.fechainicio = fechainicio;
         this.ubicacion = ubicacion;
         this.deporte = deporte;
         this.tipoevento = tipoevento;
         this.listaParticipantes = listaParticipantes;
-        this.listaequipos = listaequipos;
     }
 
     public String getNombre() {
@@ -62,13 +60,6 @@ public class EventoDeportivo {
         this.tipoevento = tipoevento;
     }
 
-    public LinkedList<EquipoParticipante> getListaequipos() {
-        return listaequipos;
-    }
-
-    public void setListaequipos(LinkedList<EquipoParticipante> listaequipos) {
-        this.listaequipos = listaequipos;
-    }
 
     public LinkedList<Participante> getListaParticipantes() {
         return listaParticipantes;

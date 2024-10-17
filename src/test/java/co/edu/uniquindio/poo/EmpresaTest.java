@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class EmpresaTest {
         String resultado = empresa.agregarpersona(null);
         assertEquals("No se pudo agregar", resultado);
 
-        Atleta atleta = new Atleta("Juan", "Rodrigues", null, "Español", Deporte.VOLLEYBALL, (byte)(5), null);
+        Atleta atleta = new Atleta("Juan", "Rodrigues", null, "colombiano", Deporte.NATACION, (byte)(20), "Colombia", (byte)(5));
         resultado = empresa.agregarpersona(atleta);
         assertEquals("Ha sido agregada correctamente", resultado);
 
@@ -66,27 +67,52 @@ public class EmpresaTest {
 
         Empresa empresa = new Empresa("UQ DEPORTES");
 
-        Atleta atleta1 = new Atleta("Juan", "Rodriguez", null, "Colombiano", Deporte.NATACION, (byte)(4), null);
-        empresa.agregarpersona(atleta1);
-        Atleta atleta2 = new Atleta("Paco", "Sanchez", null, "Peruano", Deporte.NATACION, (byte)(9), null);
+        Atleta atleta = new Atleta("Juan", "Rodrigues", null, "colombiano", Deporte.NATACION, (byte)(20), "Colombia", (byte)(5));
+        empresa.agregarpersona(atleta);
+        Atleta atleta2 = new Atleta("Paco", "Perez", null, "Peruano", Deporte.NATACION, (byte)(33), "Peru", (byte)(12));
         empresa.agregarpersona(atleta2);
 
-        LinkedList<Participante> listaParticipantes = new LinkedList<>();
+        LinkedList <Participante> listaResultante = new LinkedList<>();
+        listaResultante.add(atleta2);
+        listaResultante.add(atleta);
 
-        Participante participacion = new Participante((byte)(25), "Colombia", atleta1);
-        atleta1.agregarparticipacion(participacion);
-        listaParticipantes.add(participacion);
-        participacion = new Participante((byte)(30), "perú", atleta2);
-        atleta2.agregarparticipacion(participacion);
-        listaParticipantes.add(participacion);
+        EventoDeportivo natacionuq = new EventoDeportivo("Final natación UQ", null, "UQ", Deporte.NATACION, TipoEvento.COMPETICION, listaResultante);
+        empresa.agregarEvento(natacionuq);
 
-        EventoDeportivo finalnatacionuq = new EventoDeportivo("Final de natacion uq", null, "UQ", Deporte.NATACION, TipoEvento.COMPETICION, null, listaParticipantes);
-        empresa.agregarEvento(finalnatacionuq);
+        assertIterableEquals(listaResultante, empresa.EventoNatacionCompeticion());
 
-        LinkedList<Participante> resultado = empresa.EventoNatacionCompeticion();
+        Atleta atleta3 = new Atleta("Juan", "Rodrigues", null, "colombiano", Deporte.BALONCESTO, (byte)(20), "Colombia", (byte)(5));
+        empresa.agregarpersona(atleta3);
+        Atleta atleta4 = new Atleta("Paco", "Perez", null, "Peruano", Deporte.BALONCESTO, (byte)(33), "Peru", (byte)(12));
+        empresa.agregarpersona(atleta4);
 
-        assertEquals(listaParticipantes, resultado);
+        LinkedList <Participante> listaParticipantes2 = new LinkedList<>();
+        listaParticipantes2.add(atleta3);
+        listaParticipantes2.add(atleta4);
+
+        EventoDeportivo BasketUQ = new EventoDeportivo("Final natación UQ", null, "UQ", Deporte.BALONCESTO, TipoEvento.COMPETICION, listaParticipantes2);
+        empresa.agregarEvento(BasketUQ);
+
+        assertIterableEquals(listaResultante, empresa.EventoNatacionCompeticion());
 
         LOG.info("Finalizando test");
+
+        Atleta atleta5 = new Atleta("Pepe", "Rodrigues", null, "colombiano", Deporte.NATACION, (byte)(20), "Colombia", (byte)(5));
+        empresa.agregarpersona(atleta5);
+        Atleta atleta6 = new Atleta("Manolo", "Perez", null, "Peruano", Deporte.NATACION, (byte)(33), "Peru", (byte)(12));
+        empresa.agregarpersona(atleta6);
+
+        LinkedList <Participante> listaParticipantes3 = new LinkedList<>();
+        listaParticipantes3.add(atleta5);
+        listaParticipantes3.add(atleta6);
+
+        EventoDeportivo natacionuqV2 = new EventoDeportivo("Final natación UQ", null, "UQ", Deporte.NATACION, TipoEvento.COMPETICION, listaResultante);//Otra competición de tipo natación
+        empresa.agregarEvento(natacionuqV2);
+
+        listaResultante.add(atleta5);
+        listaResultante.add(atleta6);//Se deben agregar los participantes de este segundo evendo dado a que tambien es una competicion de natacion
+
+        //Lista resultante tiene a atleta, atleta2, atleta5 y atleta6
+        assertIterableEquals(listaResultante, empresa.EventoNatacionCompeticion());
     }
 }

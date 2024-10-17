@@ -3,11 +3,11 @@ package co.edu.uniquindio.poo.model;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class PersonalApoyo extends Persona {
+public class PersonalApoyo extends Participante{
     private LinkedList<Date> experienciaprevia;
 
-    public PersonalApoyo(String nombre, String apellido, Date fechanacimiento, String nacionalidad, Deporte deporte, LinkedList<Date> experienciaprevia){
-        super(nombre, apellido, fechanacimiento, nacionalidad, deporte);
+    public PersonalApoyo(String nombre, String apellido, Date fechanacimiento, String nacionalidad, Deporte deporte, Byte edad, String pais, LinkedList<Date> experienciaprevia){
+        super(nombre, apellido, fechanacimiento, nacionalidad, deporte, edad, pais);
         this.experienciaprevia = experienciaprevia;
     }
 
